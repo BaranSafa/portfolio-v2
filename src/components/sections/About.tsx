@@ -37,27 +37,31 @@ export default function About() {
           description="A brief look at who I am, what drives me, and what I bring to the table."
         />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left — bio + contact */}
+        <div className="grid lg:grid-cols-5 gap-10 items-start">
+          {/* Left — col-span-2: quote + contact + interests */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
-            className="space-y-8"
+            className="lg:col-span-2 space-y-6"
           >
+            {/* Quote + Bio */}
             <motion.div variants={itemVariants} className="glass rounded-2xl p-8 gradient-border">
-              <div className="flex items-start gap-3 mb-6">
-                <Quote size={28} className="text-violet-400 shrink-0 mt-1" />
-                <p className="text-slate-300 text-lg leading-relaxed italic">
+              <div className="flex items-start gap-3 mb-5">
+                <Quote size={26} className="text-violet-400 shrink-0 mt-1" />
+                <p className="text-slate-300 text-base leading-relaxed italic">
                   &ldquo;{personalInfo.quote}&rdquo;
                 </p>
               </div>
-              <p className="text-slate-400 leading-relaxed">{personalInfo.bio}</p>
+              <p className="text-slate-400 text-sm leading-relaxed">{personalInfo.bio}</p>
             </motion.div>
 
+            {/* Contact */}
             <motion.div variants={itemVariants} className="glass rounded-2xl p-6 space-y-4">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Contact</h3>
+              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+                Contact
+              </h3>
               <div className="space-y-3">
                 {[
                   { icon: Mail, label: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -65,11 +69,14 @@ export default function About() {
                   { icon: MapPin, label: personalInfo.location, href: null },
                 ].map(({ icon: Icon, label, href }) => (
                   <div key={label} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center border border-violet-500/20">
-                      <Icon size={15} className="text-violet-400" />
+                    <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center border border-violet-500/20 shrink-0">
+                      <Icon size={14} className="text-violet-400" />
                     </div>
                     {href ? (
-                      <a href={href} className="text-slate-300 hover:text-white transition-colors text-sm">
+                      <a
+                        href={href}
+                        className="text-slate-300 hover:text-white transition-colors text-sm truncate"
+                      >
                         {label}
                       </a>
                     ) : (
@@ -80,13 +87,19 @@ export default function About() {
               </div>
             </motion.div>
 
+            {/* Interests */}
             <motion.div variants={itemVariants} className="glass rounded-2xl p-6">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">Interests</h3>
-              <div className="flex flex-wrap gap-3">
+              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+                Interests
+              </h3>
+              <div className="flex flex-wrap gap-2">
                 {personalInfo.interests.map((interest, i) => {
                   const Icon = interestIcons[i];
                   return (
-                    <div key={interest} className="flex items-center gap-2 px-3 py-2 glass rounded-xl border border-white/8">
+                    <div
+                      key={interest}
+                      className="flex items-center gap-2 px-3 py-2 glass rounded-xl border border-white/8"
+                    >
                       <Icon size={14} className="text-cyan-400" />
                       <span className="text-slate-300 text-sm">{interest}</span>
                     </div>
@@ -96,32 +109,53 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* Right — stats + soft skills */}
+          {/* Right — col-span-3: stats + education + soft skills */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
-            className="space-y-8"
+            className="lg:col-span-3 space-y-6"
           >
-            {/* Stats grid */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4">
+            {/* Stats — 4 in a row on wide col, 2x2 on narrow */}
+            <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="glass rounded-2xl p-6 text-center gradient-border group hover:bg-white/5 transition-all duration-300"
+                  className="glass rounded-2xl p-5 text-center gradient-border hover:bg-white/5 transition-all duration-300"
                 >
-                  <div className="text-4xl font-bold gradient-text mb-2">
+                  <div className="text-3xl font-bold gradient-text mb-1.5">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
+                  <div className="text-xs text-slate-400 font-medium leading-tight">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
 
+            {/* Education */}
+            <motion.div variants={itemVariants} className="glass rounded-2xl p-6 gradient-border">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-600 flex items-center justify-center text-xl shrink-0">
+                  🎓
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                    Education
+                  </p>
+                  <h3 className="font-semibold text-white mb-1">Istanbul Topkapı University</h3>
+                  <p className="text-sm text-cyan-400 font-medium mb-1.5">
+                    Computer Engineering (English) · Full Scholarship
+                  </p>
+                  <p className="text-sm text-slate-400">4th Year · 2022 — 2026</p>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Soft skills */}
             <motion.div variants={itemVariants} className="glass rounded-2xl p-6">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">Soft Skills</h3>
+              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+                Soft Skills
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {softSkills.map((skill) => (
                   <span
@@ -131,23 +165,6 @@ export default function About() {
                     {skill.label}
                   </span>
                 ))}
-              </div>
-            </motion.div>
-
-            {/* Education highlight card */}
-            <motion.div
-              variants={itemVariants}
-              className="glass rounded-2xl p-6 gradient-border"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-600 flex items-center justify-center text-xl shrink-0">
-                  🎓
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Istanbul Topkapı University</h3>
-                  <p className="text-sm text-cyan-400 font-medium mb-2">Computer Engineering (English) · Full Scholarship</p>
-                  <p className="text-sm text-slate-400">4th Year · 2022 — 2026</p>
-                </div>
               </div>
             </motion.div>
           </motion.div>

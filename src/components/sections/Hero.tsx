@@ -62,7 +62,10 @@ export default function Hero() {
       {/* Background gradient blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl animate-pulse-glow"
+          style={{ animationDelay: "1.5s" }}
+        />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-900/5 rounded-full blur-3xl" />
       </div>
 
@@ -78,7 +81,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center pt-24 pb-16">
         {/* Left — text content */}
-        <div>
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,7 +98,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
           >
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="gradient-text block">Baran Safa</span>
             <span className="text-slate-300">Taşkın</span>
           </motion.h1>
@@ -116,7 +119,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg"
+            className="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0"
           >
             {personalInfo.bio}
           </motion.p>
@@ -125,10 +128,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="flex flex-wrap gap-4 mb-12"
+            className="flex flex-wrap gap-4 mb-12 justify-center lg:justify-start"
           >
             <motion.button
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="px-7 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 transition-all duration-300 shadow-lg shadow-violet-500/25"
@@ -137,7 +144,11 @@ export default function Hero() {
             </motion.button>
 
             <motion.button
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="px-7 py-3.5 rounded-xl font-semibold text-slate-300 glass border border-white/10 hover:border-violet-500/40 hover:text-white transition-all duration-300"
@@ -150,7 +161,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex items-center gap-4"
+            className="flex items-center gap-4 justify-center lg:justify-start"
           >
             <a
               href={personalInfo.github}
