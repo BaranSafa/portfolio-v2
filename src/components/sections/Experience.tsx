@@ -13,7 +13,7 @@ export default function Experience() {
         <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-cyan-900/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-3xl mx-auto relative z-10">
         <SectionHeading
           label="Background"
           title="Education & Experience"
@@ -22,13 +22,10 @@ export default function Experience() {
         />
 
         <div className="relative">
-          {/* Desktop: vertical center line */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/60 via-cyan-500/30 to-transparent" />
+          {/* Vertical center line */}
+          <div className="absolute left-5 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/60 via-cyan-500/30 to-transparent" />
 
-          {/* Mobile: vertical left line */}
-          <div className="md:hidden absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/60 via-cyan-500/30 to-transparent" />
-
-          <div className="space-y-6">
+          <div className="space-y-8">
             {timeline.map((item, index) => {
               const isLeft = index % 2 === 0;
               const Icon = item.type === "education" ? GraduationCap : Briefcase;
@@ -79,28 +76,22 @@ export default function Experience() {
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{
-                    duration: 0.6,
-                    delay: index * 0.12,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* Mobile layout: single column with left node */}
-                  <div className="md:hidden relative pl-14">
+                  {/* Mobile: single column */}
+                  <div className="sm:hidden relative pl-14">
                     <div className="absolute left-0 top-4 z-10">{nodeEl}</div>
                     {cardEl}
                   </div>
 
-                  {/* Desktop layout: 3-column grid [left | node | right] */}
-                  <div className="hidden md:grid grid-cols-[1fr_80px_1fr] items-start">
+                  {/* Desktop: alternating left / right */}
+                  <div className="hidden sm:grid grid-cols-[1fr_80px_1fr] items-start">
                     {isLeft ? (
                       <div className="pr-6">{cardEl}</div>
                     ) : (
                       <div />
                     )}
-
                     <div className="flex justify-center items-start pt-6">{nodeEl}</div>
-
                     {!isLeft ? (
                       <div className="pl-6">{cardEl}</div>
                     ) : (

@@ -29,7 +29,7 @@ const itemVariants: Variants = {
 export default function About() {
   return (
     <section id="about" className="py-28 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <SectionHeading
           label="About Me"
           title="Passionate about building"
@@ -37,28 +37,62 @@ export default function About() {
           description="A brief look at who I am, what drives me, and what I bring to the table."
         />
 
-        <div className="grid lg:grid-cols-5 gap-10 items-start">
-          {/* Left — col-span-2: quote + contact + interests */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="lg:col-span-2 space-y-6"
-          >
-            {/* Quote + Bio */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-8 gradient-border">
-              <div className="flex items-start gap-3 mb-5">
-                <Quote size={26} className="text-violet-400 shrink-0 mt-1" />
-                <p className="text-slate-300 text-base leading-relaxed italic">
-                  &ldquo;{personalInfo.quote}&rdquo;
-                </p>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          {/* Quote + Bio — centered, full width */}
+          <motion.div variants={itemVariants} className="glass rounded-2xl p-8 gradient-border">
+            <div className="flex items-start gap-4 mb-5">
+              <Quote size={28} className="text-violet-400 shrink-0 mt-1" />
+              <p className="text-slate-300 text-lg leading-relaxed italic">
+                &ldquo;{personalInfo.quote}&rdquo;
+              </p>
+            </div>
+            <p className="text-slate-400 leading-relaxed">{personalInfo.bio}</p>
+          </motion.div>
+
+          {/* Stats — 4 equal columns */}
+          <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="glass rounded-2xl p-6 text-center gradient-border hover:bg-white/5 transition-all duration-300"
+              >
+                <div className="text-3xl font-bold gradient-text mb-2">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">{personalInfo.bio}</p>
-            </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Education + Contact — 2 columns */}
+          <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-6">
+            {/* Education */}
+            <div className="glass rounded-2xl p-6 gradient-border">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-600 flex items-center justify-center text-xl shrink-0">
+                  🎓
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                    Education
+                  </p>
+                  <h3 className="font-semibold text-white mb-1">Istanbul Topkapı University</h3>
+                  <p className="text-sm text-cyan-400 font-medium mb-1.5">
+                    Computer Engineering (English) · Full Scholarship
+                  </p>
+                  <p className="text-sm text-slate-400">4th Year · 2022 — 2026</p>
+                </div>
+              </div>
+            </div>
 
             {/* Contact */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-6 space-y-4">
+            <div className="glass rounded-2xl p-6 space-y-4">
               <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
                 Contact
               </h3>
@@ -85,10 +119,13 @@ export default function About() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
+          {/* Interests + Soft Skills — 2 columns */}
+          <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-6">
             {/* Interests */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-6">
+            <div className="glass rounded-2xl p-6">
               <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
                 Interests
               </h3>
@@ -106,53 +143,10 @@ export default function About() {
                   );
                 })}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
 
-          {/* Right — col-span-3: stats + education + soft skills */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="lg:col-span-3 space-y-6"
-          >
-            {/* Stats — 4 in a row on wide col, 2x2 on narrow */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="glass rounded-2xl p-5 text-center gradient-border hover:bg-white/5 transition-all duration-300"
-                >
-                  <div className="text-3xl font-bold gradient-text mb-1.5">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <div className="text-xs text-slate-400 font-medium leading-tight">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Education */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-6 gradient-border">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-600 flex items-center justify-center text-xl shrink-0">
-                  🎓
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-                    Education
-                  </p>
-                  <h3 className="font-semibold text-white mb-1">Istanbul Topkapı University</h3>
-                  <p className="text-sm text-cyan-400 font-medium mb-1.5">
-                    Computer Engineering (English) · Full Scholarship
-                  </p>
-                  <p className="text-sm text-slate-400">4th Year · 2022 — 2026</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Soft skills */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-6">
+            {/* Soft Skills */}
+            <div className="glass rounded-2xl p-6">
               <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
                 Soft Skills
               </h3>
@@ -166,9 +160,9 @@ export default function About() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
