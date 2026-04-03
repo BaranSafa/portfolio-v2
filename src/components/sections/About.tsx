@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { MapPin, Mail, Phone, Quote, Plane, Dumbbell, BookOpen, PersonStanding } from "lucide-react";
+import { MapPin, Mail, Phone, Plane, Dumbbell, BookOpen, PersonStanding } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { personalInfo, stats } from "@/lib/data";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
@@ -16,20 +16,20 @@ const softSkills = [
   { label: "Problem Solver", color: "text-pink-400 bg-pink-500/10 border-pink-500/20" },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const containerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
 export default function About() {
   return (
     <section id="about" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <SectionHeading
           label="About Me"
           title="Passionate about building"
@@ -44,15 +44,14 @@ export default function About() {
           viewport={{ once: true, margin: "-60px" }}
           className="space-y-6"
         >
-          {/* Quote + Bio — centered, full width */}
-          <motion.div variants={itemVariants} className="glass rounded-2xl p-8 gradient-border">
-            <div className="flex items-start gap-4 mb-5">
-              <Quote size={28} className="text-violet-400 shrink-0 mt-1" />
-              <p className="text-slate-300 text-lg leading-relaxed italic">
-                &ldquo;{personalInfo.quote}&rdquo;
-              </p>
-            </div>
-            <p className="text-slate-400 leading-relaxed">{personalInfo.bio}</p>
+          {/* Bio card — centered */}
+          <motion.div variants={itemVariants} className="glass rounded-2xl p-10 gradient-border text-center">
+            <p className="text-slate-300 text-xl italic leading-relaxed mb-5 max-w-2xl mx-auto">
+              &ldquo;{personalInfo.quote}&rdquo;
+            </p>
+            <p className="text-slate-400 leading-relaxed max-w-2xl mx-auto">
+              {personalInfo.bio}
+            </p>
           </motion.div>
 
           {/* Stats — 4 equal columns */}
@@ -70,9 +69,8 @@ export default function About() {
             ))}
           </motion.div>
 
-          {/* Education + Contact — 2 columns */}
+          {/* Education + Contact */}
           <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-6">
-            {/* Education */}
             <div className="glass rounded-2xl p-6 gradient-border">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-600 flex items-center justify-center text-xl shrink-0">
@@ -84,18 +82,17 @@ export default function About() {
                   </p>
                   <h3 className="font-semibold text-white mb-1">Istanbul Topkapı University</h3>
                   <p className="text-sm text-cyan-400 font-medium mb-1.5">
-                    Computer Engineering (English) · Full Scholarship
+                    Computer Engineering · Full Scholarship
                   </p>
                   <p className="text-sm text-slate-400">4th Year · 2022 — 2026</p>
                 </div>
               </div>
             </div>
 
-            {/* Contact */}
-            <div className="glass rounded-2xl p-6 space-y-4">
-              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+            <div className="glass rounded-2xl p-6">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
                 Contact
-              </h3>
+              </p>
               <div className="space-y-3">
                 {[
                   { icon: Mail, label: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -107,10 +104,7 @@ export default function About() {
                       <Icon size={14} className="text-violet-400" />
                     </div>
                     {href ? (
-                      <a
-                        href={href}
-                        className="text-slate-300 hover:text-white transition-colors text-sm truncate"
-                      >
+                      <a href={href} className="text-slate-300 hover:text-white transition-colors text-sm truncate">
                         {label}
                       </a>
                     ) : (
@@ -122,21 +116,17 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Interests + Soft Skills — 2 columns */}
+          {/* Interests + Soft Skills */}
           <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-6">
-            {/* Interests */}
             <div className="glass rounded-2xl p-6">
-              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
                 Interests
-              </h3>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {personalInfo.interests.map((interest, i) => {
                   const Icon = interestIcons[i];
                   return (
-                    <div
-                      key={interest}
-                      className="flex items-center gap-2 px-3 py-2 glass rounded-xl border border-white/8"
-                    >
+                    <div key={interest} className="flex items-center gap-2 px-3 py-2 glass rounded-xl border border-white/8">
                       <Icon size={14} className="text-cyan-400" />
                       <span className="text-slate-300 text-sm">{interest}</span>
                     </div>
@@ -145,17 +135,13 @@ export default function About() {
               </div>
             </div>
 
-            {/* Soft Skills */}
             <div className="glass rounded-2xl p-6">
-              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
                 Soft Skills
-              </h3>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {softSkills.map((skill) => (
-                  <span
-                    key={skill.label}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${skill.color}`}
-                  >
+                  <span key={skill.label} className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${skill.color}`}>
                     {skill.label}
                   </span>
                 ))}

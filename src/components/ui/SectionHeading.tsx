@@ -32,7 +32,7 @@ export default function SectionHeading({
         {label}
       </span>
       <h2
-        className="text-4xl md:text-5xl font-bold text-slate-100 mb-4 leading-tight"
+        className="text-4xl md:text-5xl font-bold text-slate-100 mb-4 leading-tight text-center"
         dangerouslySetInnerHTML={{ __html: fullTitle }}
       />
       {description && (
